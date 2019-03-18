@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class Main {
-
 	public static void main(String[] args) throws IOException
 	{
 		JFrame myFrame = new JFrame();
@@ -55,6 +54,12 @@ public class Main {
 						man.setDx(0);
 					}
 				}
+				if(e.getKeyCode() == e.VK_SPACE)
+				{
+					Ball ball = new Ball();
+					myFrame.add(ball);
+					ball.setLocation(man.getX(), man.getY());
+				}
 			}
 			public void keyReleased(KeyEvent e)
 			{
@@ -97,10 +102,12 @@ public class Main {
 						{
 							man.setLocation(man.getX(), 0);
 						}
-						if(man.getY() > myFrame.getHeight() - 85)
+						if(man.getY() > myFrame.getHeight() - 115)
 						{
-							man.setLocation(man.getX(), myFrame.getHeight() - 85);
+							man.setLocation(man.getX(), myFrame.getHeight() - 115);
 						}
+						
+						
 					}
 				});
 		t1.start();
