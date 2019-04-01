@@ -3,11 +3,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class Main {
+	
 	public static void main(String[] args) throws IOException
 	{
 		JFrame myFrame = new JFrame();
@@ -16,6 +18,10 @@ public class Main {
 		
 		WalkingMan man = new WalkingMan(0,0);
 		myFrame.add(man);
+		
+		ArrayList<Updatable> gameObjs = new ArrayList<Updatable>();
+		
+		gameObjs.add(man);
 		
 		myFrame.addKeyListener(new KeyListener()
 		{
@@ -59,6 +65,7 @@ public class Main {
 					Ball ball = new Ball();
 					myFrame.add(ball);
 					ball.setLocation(man.getX(), man.getY());
+					gameObjs.add(ball);
 				}
 			}
 			public void keyReleased(KeyEvent e)
@@ -89,24 +96,14 @@ public class Main {
 				{
 					public void actionPerformed(ActionEvent a)
 					{
-						man.update();
-						if(man.getX() < 0)
+						for (Updatable u : gameObjs)					
 						{
-							man.setLocation(0, man.getY());
+							u.update();
+							if(ball.getX() >600 || ball.getY() > 600)
+							{
+							gameObjs.remove(u);
+							}
 						}
-						if(man.getX() > myFrame.getWidth() - 75)
-						{
-							man.setLocation(myFrame.getWidth() - 75, man.getY());
-						}
-						if(man.getY() < 0)
-						{
-							man.setLocation(man.getX(), 0);
-						}
-						if(man.getY() > myFrame.getHeight() - 115)
-						{
-							man.setLocation(man.getX(), myFrame.getHeight() - 115);
-						}
-						
 						
 					}
 				});

@@ -8,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
-public class WalkingMan extends JComponent
+public class WalkingMan extends JComponent implements Updatable
 {
 	private Ellipse2D.Double head;
 	private Rectangle arm1;
@@ -57,7 +57,27 @@ public class WalkingMan extends JComponent
 	}
 	public void update()
 	{
-		setLocation(getX() + dx, getY() + dy);
+		if (getX() + dx >= 600 && getY() + dy >= 600)
+			setLocation(getX() + dx, getY() + dy);		
+		
+		/*
+		if(getX() < 0)
+		{
+			setLocation(0, man.getY());
+		}
+		if(man.getX() > myFrame.getWidth() - 75)
+		{
+			man.setLocation(myFrame.getWidth() - 75, man.getY());
+		}
+		if(man.getY() < 0)
+		{
+			man.setLocation(man.getX(), 0);
+		}
+		if(man.getY() > myFrame.getHeight() - 115)
+		{
+			man.setLocation(man.getX(), myFrame.getHeight() - 115);
+		}
+		*/
 	}
 	
 }
